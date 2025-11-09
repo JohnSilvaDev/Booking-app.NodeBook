@@ -1,0 +1,40 @@
+###
+GET http://localhost:5000/api/rooms
+
+###
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+ 
+{
+    "name": "test room",
+    "price": 500,
+    "desc": "some descrip",
+    "roomNumbers": [{
+        "number": 101,              
+        "unavailableDates": ["2024-01-24","2024-01-26"]
+    }]
+}
+
+# get single room
+###
+GET http://localhost:5000/api/rooms/
+
+
+
+# update room
+###
+PUT http://localhost:5000/api/rooms/69066d9e76be42fcc918fced
+Content-Type: application/json
+ 
+{
+    "name": "updated room",
+    "price": 1500  
+}
+
+# delete room
+###
+DELETE  http://localhost:5000/api/rooms/69066d9e76be42fcc918fced
+
+# get bookings
+### 
+GET url http://localhost:5000/api/bookings
