@@ -43,98 +43,133 @@ node -v
 npm -v
 git --version
 mongod --version
-⚙️ Installation
-1️⃣ Clone the repository
+```
+--- 
+
+## ⚙️ Installation
+## 1️⃣ Clone the repository
+```
 git clone https://github.com/JohnSilvaDev/Booking-app.NodeBook.git
 cd Booking-app.NodeBook
-2️⃣ Install dependencies
-npm install
-🗄️ Database Setup (MongoDB)
-This project uses MongoDB as its database.
+```
+--- 
 
-🖥️ Local MongoDB Setup
-1️⃣ Install MongoDB
+## 2️⃣ Install dependencies
+```
+npm install
+```
+## 🗄️ Database Setup (MongoDB)
+This project uses MongoDB as its database.
+---
+## 🖥️ Local MongoDB Setup
+## 1️⃣ Install MongoDB
 Download and install MongoDB Community Server:
 https://www.mongodb.com/try/download/community
 
 Verify installation:
-
+```
 mongod --version
-2️⃣ Start MongoDB Server
+```
+---
+## 2️⃣ Start MongoDB Server
+---
+```
 mongod
+```
 or (Windows service):
-
+```
 net start MongoDB
-3️⃣ Create Database
+```
+---
+## 3️⃣ Create Database
 MongoDB automatically creates the database when data is inserted.
 
 Suggested database name:
-
+```
 nodebook
-☁️ MongoDB Atlas (Cloud Setup – Recommended)
-1️⃣ Create Free Cluster
-Go to: https://www.mongodb.com/cloud/atlas
+```
+---
+## ☁️ MongoDB Atlas (Cloud Setup – Recommended)
+## 1️⃣ Create Free Cluster
+**1.** Go to: https://www.mongodb.com/cloud/atlas
 
-Create account → Create Free Shared Cluster
+**2.** Create account → Create Free Shared Cluster
 
-Choose a region near your location
+**3.** Choose a region near your location
+---
+## 2️⃣ Create Database User
+**1.** Go to Database Access
 
-2️⃣ Create Database User
-Go to Database Access
+**2.** Create a new user:
 
-Create a new user:
+* Username
 
-Username
+* Password
 
-Password
+* Role: Read and Write
+---
+## 3️⃣ Whitelist IP Address
+**1.** Go to Network Access
 
-Role: Read and Write
-
-3️⃣ Whitelist IP Address
-Go to Network Access
-
-Add your IP or allow:
-
+**2.** Add your IP or allow:
+```
 0.0.0.0/0
-4️⃣ Get Connection URI
-Click Connect → Drivers
+```
+---
+## 4️⃣ Get Connection URI
+**1.** Click Connect → Drivers
 
-Copy your connection string:
-
+**2.** Copy your connection string:
+```
 mongodb+srv://<username>:<password>@cluster.mongodb.net/nodebook
-🔐 Environment Variables Setup
+```
+---
+## 🔐 Environment Variables Setup
 Create a .env file in the project root:
-
+```
 cp .env.example .env
+```
 Configure:
-
+```
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/nodebook
+```
 Or using MongoDB Atlas:
-
+```
 PORT=3000
 MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/nodebook
-▶️ Running the Project
+```
+---
+## ▶️ Running the Project
 Development Mode
+```
 npm run dev
+```
 Production Mode
+```
 npm start
+```
 Server will run at:
-
+```
 http://localhost:3000
-🧪 API Testing
+```
+---
+## 🧪 API Testing
 You can test the API using:
 
-Postman
+* **Postman**
 
-Insomnia
+* **Insomnia**
 
-REST Client (request.rest)
+* **REST Client (request.rest)**
 
 Example request:
-
+```
 GET http://localhost:3000/api/bookings
-📁 Project Structure
+```
+---
+## 📁 Project Structure
+```
 Booking-app.NodeBook/
 │
 ├── server/
@@ -149,35 +184,48 @@ Booking-app.NodeBook/
 ├── package.json
 ├── package-lock.json
 └── request.rest      # REST client test file
-📌 Available Scripts
+```
+---
+## 📌 Available Scripts
+```
 npm start       # Start server (production)
 npm run dev     # Start server with nodemon (development)
 npm test        # Run tests (if implemented)
-🛠️ Troubleshooting
+```
+---
+## 🛠️ Troubleshooting
 MongoDB connection error
 Make sure MongoDB is running:
-
+```
 mongod
-Verify your .env connection string.
+```
+* Verify your .env connection string.
 
-Check firewall and IP whitelist (Atlas).
+* Check firewall and IP whitelist (Atlas).
 
 Port already in use
 Change the port inside .env:
-
+```
 PORT=4000
-🚧 Roadmap
- Authentication (JWT)
+```
+---
+## 🚧 Roadmap
+* Authentication (JWT)
 
- User roles & permissions
+* User roles & permissions
 
- Booking availability system
+* Booking availability system
 
- Admin dashboard
+* Admin dashboard
 
- Docker deployment
+* Docker deployment
 
- API documentation (Swagger)
-
-📄 License
+* API documentation (Swagger)
+---
+## 📄 License
 This project is licensed under the MIT License.
+---
+## 👨‍💻 Author
+---
+John Silva
+GitHub: https://github.com/JohnSilvaDev
