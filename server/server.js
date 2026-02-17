@@ -5,6 +5,7 @@
     const connectDB = require("./config/db");
     const roomRoutes = require("./routes/roomRoutes");
     const bookingRoutes = require("./routes/bookingRoutes");
+    const userRoutes = require("./routes/userRoutes")
     const port = process.env.PORT || 5000;
 
     //connect to database   
@@ -16,7 +17,7 @@
     //setup routes 
     app.use("/api/rooms", roomRoutes);
     app.use("/api/bookings", bookingRoutes);
-    
+    app.use("/api/users", userRoutes)
 
     app.listen(port, () => console.log(`listening on port ${port}`));
 
@@ -24,5 +25,5 @@
 
 
   
-
+``
    

@@ -1,6 +1,10 @@
 ###
 GET http://localhost:5000/api/rooms
 
+# get single room
+###
+GET http://localhost:5000/api/rooms/
+
 ###
 POST http://localhost:5000/api/rooms
 Content-Type: application/json
@@ -14,11 +18,6 @@ Content-Type: application/json
         "unavailableDates": ["2024-01-24","2024-01-26"]
     }]
 }
-
-# get single room
-###
-GET http://localhost:5000/api/rooms/
-
 
 
 # update room
@@ -37,4 +36,64 @@ DELETE  http://localhost:5000/api/rooms/69066d9e76be42fcc918fced
 
 # get bookings
 ### 
-GET url http://localhost:5000/api/bookings
+GET http://localhost:5000/api/bookings
+
+# get single booking
+### 
+GET http://localhost:5000/api/bookings/6906773e23a894dc54456118
+
+# post booking
+### 
+POST http://localhost:5000/api/bookings
+Content-Type: application/json
+
+{
+  "roomId": "690675bca63fbaf8467608e5",
+  "name": "Robert",
+  "email": "oi@gmail.com",
+  "checkInDate": "2025-11-15",
+  "checkOutDate": "2025-11-18"
+}
+
+
+# update booking
+###
+PUT http://localhost:5000/api/bookings/6906776cc32a0a112adeec87
+Content-Type: application/json
+ 
+{
+    "name": "Stalin",
+    "email": "Stalinn@gmail.com"
+}
+
+# delete booking
+###
+DELETE http://localhost:5000/api/bookings/6906773e23a894dc54456118
+
+#get users
+###
+GET http://localhost:5000/api/users
+
+#create user
+###
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "name": "John",
+    "email": "john@gmail.com",
+    "password": "81312192"
+}
+
+# update user
+###
+PUT http://localhost:5000/api/users/6994702bab056b4165c62b73
+Content-Type: application/json
+
+ {
+    "email": "johnny.8131@gmail.com"
+}
+
+# delete user
+###
+DELETE  http://localhost:5000/api/users/69947062a1f8a54bd6d3a266

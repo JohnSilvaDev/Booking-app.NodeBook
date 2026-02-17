@@ -1,24 +1,5 @@
 const Room = require("../models/roomModel");
 
-// Create room
-const createRoom = async (req, res, next) => {
-  try {
-    if (!req.body || Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "Request body cannot be empty" });
-    }
-
-    const room = await Room.create(req.body);
-
-    console.log("✅ Room created:", room._id);
-    return res.status(201).json({
-      message: "Room successfully created",
-      room,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 // Get all rooms
 const getRooms = async (req, res, next) => {
   try {
@@ -44,6 +25,25 @@ const getRoom = async (req, res, next) => {
     }
 
     return res.status(200).json(room);
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Create room
+const createRoom = async (req, res, next) => {
+  try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({ message: "Request body cannot be empty" });
+    }
+
+    const room = await Room.create(req.body);
+
+    console.log("✅ Room created:", room._id);
+    return res.status(201).json({
+      message: "Room successfully created",
+      room,
+    });
   } catch (error) {
     next(error);
   }
