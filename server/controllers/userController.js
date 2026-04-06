@@ -1,4 +1,6 @@
 const User = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const getUsers = async (req, res, next) => {
   try {
@@ -28,10 +30,17 @@ const getUser = async (req, res, next) => {
 };
 
 
-
 const createUser = async (req, res, next) => {
   try {
-    const newUser = await User.create(req.body);
+    const { password, ...rest} = req.body;
+
+    // generate salt;
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+    const newUser = await User.create({
+      ...rest,
+      password: hashedPassword,
+    });
 
     if (!newUser) {
       res.status(400);
@@ -39,7 +48,10 @@ const createUser = async (req, res, next) => {
     }
 
     // hash password before saving to database
-    return res.status(201).json(newUser);
+
+    const { password: userPassword, ...otherDetails } = newUser._doc;
+
+    return res.status(201).json(otherDetails);
 
   } catch (error) {
     next(error);
@@ -81,10 +93,65 @@ const deleteUser = async (req, res, next) => {
   }
 };
 
+const loginUser = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const now = Date.now();
+
+    const attempt = req.loginAttempt; // 👈 shared reference
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      // ❌ do NOT replace object
+      attempt.count += 1;
+      attempt.lastAttempt = now;
+
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const isCorrect = await bcrypt.compare(password, user.password);
+
+    if (!isCorrect) {
+      // ❌ do NOT replace object
+      attempt.count += 1;
+      attempt.lastAttempt = now;
+
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    // ✅ success → reset attempts
+    attempt.count = 0;
+    attempt.lastAttempt = now;
+
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "14d" } // or "15m", "7d", etc.
+    );
+
+    res.cookie("jwt", token);
+
+    const { password: userPassword, ...rest } = user._doc;
+
+    return res.status(200).json(rest);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+const logoutUSer = async (req, res, next) => {
+  res.clearCookie("jwt");
+  return res.json({ message: "You have been logged out" });
+};
+
 module.exports = {
+  logoutUSer,
   getUsers,
   getUser,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  loginUser,
 };

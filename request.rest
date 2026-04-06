@@ -1,20 +1,22 @@
-###
-GET http://localhost:5000/api/rooms
-
 # get single room
+### 
+GET http://localhost:5000/api/rooms/69d3bec255958d52ab66fd17
+
+# get rooms
 ###
 GET http://localhost:5000/api/rooms/
 
+# create room
 ###
 POST http://localhost:5000/api/rooms
 Content-Type: application/json
  
 {
-    "name": "test room",
-    "price": 500,
-    "desc": "some descrip",
+    "name": "Lenin room",
+    "price": 4500,
+    "desc": "Stalin",
     "roomNumbers": [{
-        "number": 101,              
+        "number": 102,              
         "unavailableDates": ["2024-01-24","2024-01-26"]
     }]
 }
@@ -22,17 +24,17 @@ Content-Type: application/json
 
 # update room
 ###
-PUT http://localhost:5000/api/rooms/69066d9e76be42fcc918fced
+PUT http://localhost:5000/api/rooms/69d3db4f3d704cdf9c049e7f
 Content-Type: application/json
  
 {
-    "name": "updated room",
-    "price": 1500  
+    "name": "Lenin room",
+    "price": 3200  
 }
 
 # delete room
 ###
-DELETE  http://localhost:5000/api/rooms/69066d9e76be42fcc918fced
+DELETE  http://localhost:5000/api/rooms/69d3db8d3d704cdf9c049e8e
 
 # get bookings
 ### 
@@ -49,8 +51,8 @@ Content-Type: application/json
 
 {
   "roomId": "690675bca63fbaf8467608e5",
-  "name": "Robert",
-  "email": "oi@gmail.com",
+  "name": "damiao",
+  "email": "aloi@gmail.com",
   "checkInDate": "2025-11-15",
   "checkOutDate": "2025-11-18"
 }
@@ -63,12 +65,12 @@ Content-Type: application/json
  
 {
     "name": "Stalin",
-    "email": "Stalinn@gmail.com"
+    "email": "Stalin@gmail.com"
 }
 
 # delete booking
 ###
-DELETE http://localhost:5000/api/bookings/6906773e23a894dc54456118
+DELETE http://localhost:5000/api/bookings/699c559d96e7d7072b934a28
 
 #get users
 ###
@@ -80,8 +82,8 @@ POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-    "name": "John",
-    "email": "john@gmail.com",
+    "name": "Lenin",
+    "email": "lenin@gmail.com",
     "password": "81312192"
 }
 
@@ -96,4 +98,22 @@ Content-Type: application/json
 
 # delete user
 ###
-DELETE  http://localhost:5000/api/users/69947062a1f8a54bd6d3a266
+DELETE  http://localhost:5000/api/users/699c56456d95ea92b68236ee
+
+# login user
+###
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+ {
+       "email": "lenin@gmail.com",
+    "password": "81312192"
+}
+
+#check auth
+###
+GET http://localhost:5000/auth
+
+#logout user
+###
+POST http://localhost:5000/api/users/logout

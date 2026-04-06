@@ -1,5 +1,7 @@
 const { Router } = require("express");
-const { getRooms, getRoom, createRoom, updateRoom, deleteRoom } = require("../controllers/roomController.js")
+
+const { getRooms, getRoom, createRoom, updateRoom, deleteRoom } = require("../controllers/roomController.js");
+const { auth } = require("../middleware/authMiddleware.js");
 
 const router = Router();
 
@@ -10,12 +12,12 @@ router.get("/", getRooms)
 router.get("/:id" , getRoom)
 
 //create room
-router.post("/", createRoom)
+router.post("/", auth, createRoom)
 
 //update room
-router.put("/:id", updateRoom)
+router.put("/:id", auth, updateRoom)
 
 //delete room
-router.delete("/:id", deleteRoom)
+router.delete("/:id", auth, deleteRoom)
 
 module.exports = router;

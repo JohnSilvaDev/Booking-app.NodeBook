@@ -6,12 +6,15 @@ const {
     updateBooking,
     deleteBooking,
 } = require("../controllers/bookingController");
+const { auth } = require("../middleware/authMiddleware");
+const { createBookingLimiter } = require("../middleware/rateLimiters");
+const bookingGuard = require("../middleware/bookingGuard");
 
 const router = Router();
 
-router.get("/", getBookings);
-router.get("/:id", getBooking);
-router.post("/", createBooking);
-router.put("/:id", updateBooking);
-router.delete("/:id", deleteBooking);
+router.get("/", auth, getBookings);
+router.get("/:id", auth, getBooking);
+router.post("/", auth, createBookingLimiter, bookingGuard, createBooking);
+router.put("/:id", auth, updateBooking);
+router.delete("/:id", auth, deleteBooking);
 module.exports = router;
